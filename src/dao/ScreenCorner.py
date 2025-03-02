@@ -3,6 +3,7 @@ from enum import Enum
 class ScreenCorner(Enum):
     FULLSCREEN = "Fullscreen"
     TOP = "Top"
+    MIDDLE = "Middle"
     BOTTOM = "Bottom"
     TOP_LEFT = "Top-left"
     TOP_RIGHT = "Top-right"

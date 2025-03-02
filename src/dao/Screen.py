@@ -3,11 +3,18 @@ from typing import Callable, Optional, Tuple
 
 class Screen:
     def __init__(self):
+        self._get_number: Optional[Callable[[], int]] = None
         self._get_name: Optional[Callable[[], str]] = None
         self._get_x: Optional[Callable[[], int]] = None
         self._get_y: Optional[Callable[[], int]] = None
         self._get_width: Optional[Callable[[], int]] = None
         self._get_height: Optional[Callable[[], int]] = None
+
+    def set_get_number(self, number_getter: Callable[[], int]):
+        self._get_number = number_getter
+
+    def get_number(self) -> int:
+        return self._get_number()
 
     def set_get_name(self, name_getter: Callable[[], str]):
         self._get_name = name_getter
@@ -44,6 +51,12 @@ class Screen:
 
     def get_size(self) -> Tuple[int, int]:
         return self.get_width(), self.get_height()
+    
+    def is_sixteen_by_nine(self) -> bool:
+        return self.get_width() / self.get_height() == 16 / 9
+    
+    def is_nine_by_sixteen(self) -> bool:
+        return self.get_width() / self.get_height() == 9 / 16
 
     @staticmethod
     def from_xrandr_output(output: str) -> 'Screen':
@@ -51,9 +64,9 @@ class Screen:
         if match:
             screen = Screen()
             screen.set_get_name(lambda: match.group(1))
-            screen.set_get_x(lambda: int(match.group(4)))
-            screen.set_get_y(lambda: int(match.group(5)))
             screen.set_get_width(lambda: int(match.group(2)))
             screen.set_get_height(lambda: int(match.group(3)))
+            screen.set_get_x(lambda: int(match.group(4)))
+            screen.set_get_y(lambda: int(match.group(5)))
             return screen
         return None

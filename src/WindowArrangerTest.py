@@ -61,5 +61,5 @@ def list_all_screens() -> None:
         print(f"Screen {i}: dimensions: {screen_width}x{screen_height}, position: {screen_x},{screen_y}")
 
 if __name__ == "__main__":
-    twitch_windows = twitch_window_controller.get_twitch_windows()
+    twitch_windows = twitch_window_controller.create_twitch_windows()
     arrange_twitch_windows(twitch_windows)

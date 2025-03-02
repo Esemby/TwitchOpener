@@ -10,5 +10,5 @@ if [ ! -d "$ROOT_DIR/venv" ]; then
 else
     source "$ROOT_DIR/venv/bin/activate"
 fi
-python3 -m pip install -r "$ROOT_DIR/src/requirements.txt"
-python3 -u "$ROOT_DIR/src/TwitchOpener.py"
+python3 -m pip install -r "$ROOT_DIR/src/config/requirements.txt"
+python3 -u "$ROOT_DIR/src/main.py"
